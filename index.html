@@ -2,356 +2,213 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>ZORK I: The Great Underground Empire</title>
-<meta name="viewport" content="width=device-width, user-scalable=no">
+<title>Zork I &mdash; v1: The Port &mdash; IF Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ifhub:title" content="Zork I (v1 — The Port)">
+<meta name="ifhub:meta" content="Infocom (translated to Inform 7)">
+<meta name="ifhub:description" content="The first complete, playable, winnable translation of Zork I from ZIL to Inform 7. 110 rooms, 138 objects, every puzzle faithfully reproduced.">
 
 <style>
-/* === Reset & Base === */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
+html {
   height: 100%;
   background: #0a0a0a;
   color: #d4c5a9;
   font-family: Georgia, "Times New Roman", serif;
-  overflow: hidden;
 }
 
-/* === Game Port (Quixe container) === */
-#gameport {
-  position: absolute;
-  overflow: hidden;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: #111;
-  margin: 0;
+body {
+  min-height: 100%;
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+  line-height: 1.7;
 }
 
-/* === GlkOte core === */
-#windowport {
-  width: 100%;
-  height: 100%;
-}
-
-#errorpane {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  background: #4a1010;
-  border-bottom: 2px solid #882020;
-  z-index: 100;
-}
-
-#errorpane.WarningPane {
-  background: #1a1a40;
-  border-bottom: 2px solid #3333aa;
-}
-
-#errorpane:hover {
-  opacity: 0.7;
-}
-
-#errorcontent {
-  font-size: 1em;
-  padding: 0.8em;
-  text-align: center;
-  color: #ff9999;
-}
-
-#loadingpane {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  top: 35%;
+.breadcrumb {
+  font-size: 0.85em;
   color: #887755;
-  font-size: 1.2em;
+  margin-bottom: 24px;
 }
 
-#loadingpane img {
-  display: none;
+.breadcrumb a {
+  color: #887755;
+  border-bottom-color: #3a3020;
 }
 
-/* === Window Frames === */
-.WindowFrame {
-  position: absolute;
-  margin: 0;
-  background: #111;
+.breadcrumb a:hover {
+  color: #e8d090;
 }
 
-/* === Buffer Window (main text) === */
-.BufferWindow {
-  overflow-y: scroll;
-  overflow-x: hidden;
-  font-family: "Iowan Old Style", Palatino, Georgia, "Times New Roman", serif;
-  font-size: 16px;
-  line-height: 1.6;
-  padding: 20px 40px;
-  color: #d4c5a9;
-  background: #111;
+h1 {
+  font-size: 1.8em;
+  color: #e8d8b0;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
 }
 
-/* Scrollbar styling */
-.BufferWindow::-webkit-scrollbar {
-  width: 8px;
-}
-.BufferWindow::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
-.BufferWindow::-webkit-scrollbar-thumb {
-  background: #3a3020;
-  border-radius: 4px;
-}
-.BufferWindow::-webkit-scrollbar-thumb:hover {
-  background: #5a4a30;
-}
-
-.BufferLine {
-  white-space: pre-wrap;
-}
-
-.BlankLineSpan {
-  display: none;
-}
-.BlankLineSpan:only-child {
-  display: inline;
-}
-
-.BufferLine:last-child {
-  margin-bottom: 14px;
-}
-
-.HasNoInputField .BufferLine:last-child .BlankLineSpan {
-  display: none;
-}
-.HasNoInputField .BufferLine:last-child .InvisiblePos {
-  display: none;
-}
-
-/* === Grid Window (status bar) === */
-.GridWindow {
-  background: #1c1810;
-  overflow: hidden;
-  font-family: "SF Mono", "Fira Code", "Cascadia Code", Consolas, "Courier New", monospace;
-  font-size: 14px;
-  padding: 6px 12px;
+.subtitle {
+  font-style: italic;
   color: #aa9966;
+  margin-bottom: 40px;
+}
+
+h2 {
+  font-size: 1.2em;
+  color: #c4b48a;
+  margin-top: 48px;
+  margin-bottom: 16px;
+  padding-bottom: 6px;
   border-bottom: 1px solid #2a2418;
 }
 
-.GridLine {
-  white-space: pre;
+p {
+  margin-bottom: 16px;
 }
 
-/* === Cursor === */
-.InvisibleCursor {
-  position: relative;
-}
-
-/* === More Prompt === */
-.MorePrompt {
-  font-weight: bold;
-  position: absolute;
-  pointer-events: none;
-  background: #3a2a10;
-  color: #d4c5a9;
-  opacity: 0.7;
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-size: 13px;
-}
-
-.PreviousMark {
-  position: absolute;
-  background: #3a2a10;
-  height: 2px;
-  width: 12px;
-  top: 0;
-  right: 0;
-}
-
-/* === Input Field === */
-.Input {
-  border: none;
-  margin: 0;
-  padding: 0;
-  outline: none;
-  background: none;
-  font-weight: bold;
+a {
   color: #e8d090;
-  caret-color: #e8d090;
+  text-decoration: none;
+  border-bottom: 1px solid #5a4a30;
+  transition: color 0.15s, border-color 0.15s;
 }
 
-.BufferWindow .Input {
-  font-family: "Iowan Old Style", Palatino, Georgia, "Times New Roman", serif;
-  font-size: 16px;
+a:hover {
+  color: #ffe8a0;
+  border-bottom-color: #aa9966;
 }
 
-.GridWindow .Input {
-  font-family: "SF Mono", "Fira Code", "Cascadia Code", Consolas, "Courier New", monospace;
-  font-size: 14px;
+ul {
+  margin: 8px 0 16px 20px;
+  color: #b0a080;
 }
 
-.Input:focus::placeholder {
-  color: transparent;
+li {
+  margin-bottom: 4px;
 }
 
-/* === Images === */
-.ImageMarginLeft  { float: left; margin-right: 0.5em; }
-.ImageMarginRight { float: right; margin-left: 0.5em; }
-.ImageInlineDown  { vertical-align: text-top; }
-.ImageInlineUp    { vertical-align: text-bottom; }
-.ImageInlineCenter { vertical-align: middle; }
-.FlowBreak { clear: both; }
-
-.GraphicsWindow canvas {
-  display: block;
-  background-color: #111;
+.btn-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
 }
 
-/* === Glk Text Styles === */
-.Style_normal { }
-.Style_emphasized { font-style: italic; }
-.Style_preformatted {
-  font-family: "SF Mono", "Fira Code", Consolas, "Courier New", monospace;
-}
-.Style_header {
-  font-weight: bold;
-  color: #e8d8b0;
-}
-.BufferWindow .Style_header {
-  font-size: 18px;
-}
-.Style_subheader { font-weight: bold; }
-.Style_alert { font-weight: bold; color: #cc8844; }
-.Style_note { font-style: italic; color: #aa9966; }
-.Style_blockquote { background: #1a1810; padding: 2px 4px; }
-.Style_input { font-weight: bold; color: #e8d090; }
-.Style_user1 { }
-.Style_user2 { }
-
-/* === Dialog boxes (save/restore) === */
-#dialog_screen {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  opacity: 0.6;
-}
-
-#dialog_frame {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-#dialog {
-  position: relative;
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 100px;
-  background: #1a1810;
-  border: 2px solid #3a2a10;
-  border-radius: 8px;
-  box-shadow: 0 4px 30px rgba(0,0,0,0.8);
-  color: #d4c5a9;
-}
-
-#dialog .DiaCaption { margin: 16px; }
-#dialog .DiaWarning { margin: 16px; font-size: 14px; font-style: italic; }
-#dialog .DiaInput { margin: 16px; }
-#dialog input {
-  width: 100%;
-  background: #111;
-  border: 1px solid #3a2a10;
-  color: #d4c5a9;
-  padding: 4px 8px;
-}
-#dialog .DiaBody { margin: 16px; clear: both; }
-#dialog select {
-  width: 100%;
-  background: #111;
-  color: #d4c5a9;
-  border: 1px solid #3a2a10;
-}
-#dialog button {
-  margin-left: 8px;
+.btn-row a {
+  display: inline-block;
+  padding: 10px 28px;
   background: #2a2010;
-  color: #d4c5a9;
-  border: 1px solid #4a3a20;
-  padding: 4px 16px;
-  cursor: pointer;
+  border: 1px solid #5a4a30;
   border-radius: 4px;
-}
-#dialog button:hover {
-  background: #3a3020;
-}
-#dialog .DiaButtons { margin: 16px; text-align: right; }
-#dialog .DiaButtonsFloat { margin: 0 16px; float: right; }
-#dialog .DiaDisplayText {
+  color: #e8d090;
   font-family: inherit;
-  height: 200px;
-  padding: 4px 8px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  font-size: 14px;
-  white-space: pre-wrap;
-  background: #0a0a08;
-  color: #aa9966;
+  font-size: 1em;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
-/* === Loading screen === */
-@keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+.btn-row a:hover {
+  background: #3a3018;
+  color: #ffe8a0;
+  border-color: #aa9966;
 }
 
-#loadingpane em {
-  animation: pulse 1.5s ease-in-out infinite;
+.version-nav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.version-nav a, .version-nav span {
+  display: inline-block;
+  padding: 6px 16px;
+  border: 1px solid #2a2418;
+  border-radius: 4px;
+  font-size: 0.9em;
+  text-decoration: none;
+}
+
+.version-nav a {
+  color: #b0a080;
+  border-bottom: none;
+}
+
+.version-nav a:hover {
+  background: #2a2010;
+  color: #e8d090;
+  border-color: #5a4a30;
+}
+
+.version-nav .current {
+  background: #2a2010;
+  color: #e8d090;
+  border-color: #5a4a30;
+}
+
+footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid #1e1a14;
+  font-size: 0.85em;
+  color: #665a40;
+}
+
+footer a {
+  color: #887755;
+  border-bottom-color: #3a3020;
 }
 </style>
-
-<script src="lib/jquery-1.12.4.min.js"></script>
-<script src="lib/glkote.min.js"></script>
-<script src="lib/quixe.min.js"></script>
-
-<script>
-game_options = {
-  use_query_story: false,
-  log_execution_time: false,
-  set_page_title: true
-};
-</script>
-
-<script src="zork1.ulx.js"></script>
-
-<script>
-$(document).ready(function() {
-  GiLoad.load_run(game_options, defined_game_b64, 'base64');
-});
-</script>
-
 </head>
 <body>
 
-<div id="gameport">
-  <div id="windowport">
-    <noscript>
-      <div style="text-align:center; padding:40px; color:#aa6644;">
-        <h2>ZORK I</h2>
-        <p>JavaScript is required to play this game.</p>
-      </div>
-    </noscript>
-  </div>
-  <div id="loadingpane">
-    <div style="margin-bottom:20px; font-size:1.4em; color:#aa9966; letter-spacing:4px;">ZORK I</div>
-    <em>Loading the Great Underground Empire...</em>
-  </div>
-  <div id="errorpane" style="display:none;">
-    <div id="errorcontent">...</div>
-  </div>
+<nav class="breadcrumb"><a href="/ifhub/">IF Hub</a> &rsaquo; <a href="/zork1/">Zork I</a> &rsaquo; v1 &mdash; The Port</nav>
+
+<h1>Zork I &mdash; v1: The Port</h1>
+<p class="subtitle">ZIL to Inform 7 Translation</p>
+
+<div class="btn-row">
+  <a href="play.html">Play</a>
+  <a href="/ifhub/app.html?game=zork1-v1">Play in IF Hub</a>
+  <a href="source.html">Source</a>
+  <a href="walkthrough.html">Walkthrough</a>
 </div>
+
+<p>The first complete, playable, winnable translation of Zork I from ZIL to Inform 7. 110 rooms, 138 objects, every puzzle faithfully reproduced. The goal: a 1:1 gameplay match with the original.</p>
+
+<p>Claude Code performed the initial translation in a single pass &mdash; it compiled on the first try. But &ldquo;compiles&rdquo; does not mean &ldquo;correct.&rdquo; The real work began in comparing transcripts side by side, discovering what the translation missed. 377 missing text responses were restored from ZIL source in a 6-phase audit (<a href="https://github.com/Johnesco/zork1/issues/44">#44</a>).</p>
+
+<h2>What&rsquo;s in v1</h2>
+
+<ul>
+  <li>110 rooms across five regions, all 19 treasures, 350-point scoring system with ranked titles</li>
+  <li>NPCs: roaming thief (5-turn patrol cycle, 75% steal rate, treasure redistribution), troll combat with unconscious/recovery mechanic, cyclops with multiple solutions</li>
+  <li>Full puzzle systems: dam and reservoir, exorcism ceremony, coal-to-diamond machine, inflatable boat and river, mirror rooms</li>
+  <li>377 missing text responses restored from ZIL source in a 6-phase audit</li>
+  <li>Dead player ghost state &mdash; explore as spirit with dimly-lit rooms and prayer resurrection</li>
+  <li>Sword glow scans adjacent rooms and detects all three villains, matching ZIL logic</li>
+</ul>
+
+<h2>What&rsquo;s NOT in v1</h2>
+
+<p>No bug fixes beyond what the modern engine naturally corrects. No sound. No visual effects. This is the raw translation &mdash; if it was in the ZIL, it&rsquo;s in v1. The original bugs that survived the engine transition are still here. Improvement begins in <a href="/zork1-v2/">v2</a>.</p>
+
+<h2>All Versions</h2>
+
+<div class="version-nav">
+  <a href="/zork1-v0/">v0 &mdash; Original ZIL</a>
+  <span class="current">v1 &mdash; The Port</span>
+  <a href="/zork1-v2/">v2 &mdash; Bug Fixes</a>
+  <a href="/zork1-v3/">v3 &mdash; Multimedia</a>
+  <a href="/zork1/">Current</a>
+</div>
+
+<footer>
+<p><em>Zork I: The Great Underground Empire</em> was written by Marc Blank, Dave Lebling, Bruce Daniels, and Tim Anderson, and published by <a href="https://en.wikipedia.org/wiki/Infocom">Infocom</a> (1980). This Inform 7 translation is an unofficial fan project.</p>
+<p>Built with <a href="http://inform7.com/">Inform 7</a>. Source on <a href="https://github.com/Johnesco/zork1-v1">GitHub</a>.</p>
+</footer>
 
 </body>
 </html>
