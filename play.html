@@ -1,14 +1,19 @@
+<!-- Template tokens (substituted by setup_web.py and compile.py):
+     Zork I - The Great Underground Empire      — Game title (from story.ni or games.json)
+     zork1-v1.ulx.js — Binary filename, e.g. "game.ulx.js?v=1775078368" or "game.gblorb.js?v=1775078368"
+     lib/parchment/zork1-v1.ulx.js — Full path to binary, e.g. "lib/parchment/game.ulx.js?v=1775078368"
+     lib/parchment/   — Parchment library path, e.g. "lib/parchment/" or "../../lib/parchment/"
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>ZORK I: The Great Underground Empire</title>
+<title>Zork I - The Great Underground Empire</title>
 <meta name="viewport" content="width=device-width, user-scalable=no">
-<link rel="stylesheet" href="lib/parchment/parchment.css">
-<link rel="stylesheet" href="lib/parchment/main.css">
+<link rel="stylesheet" href="lib/parchment/parchment.css?v=1775078368">
+<link rel="stylesheet" href="lib/parchment/main.css?v=1775078368">
 
 <style>
-/* Dark parchment theme overrides for AsyncGlk/Parchment */
 :root {
   --glkote-buffer-bg: #111;
   --glkote-buffer-fg: #d4c5a9;
@@ -68,6 +73,8 @@ div#gameport {
   caret-color: #e8d090;
 }
 
+.Style_user1 { display: none; }
+
 .Style_header {
   color: #e8d8b0;
 }
@@ -80,13 +87,11 @@ div#gameport {
   color: #aa9966;
 }
 
-/* Scrollbar */
 .BufferWindow::-webkit-scrollbar { width: 8px; }
 .BufferWindow::-webkit-scrollbar-track { background: #1a1a1a; }
 .BufferWindow::-webkit-scrollbar-thumb { background: #3a3020; border-radius: 4px; }
 .BufferWindow::-webkit-scrollbar-thumb:hover { background: #5a4a30; }
 
-/* Loading screen */
 #loadingpane {
   position: absolute;
   width: 100%;
@@ -107,19 +112,22 @@ div#gameport {
 }
 </style>
 
-<script src="lib/parchment/jquery.min.js"></script>
-<script src="lib/parchment/ie.js" nomodule></script>
+<script src="lib/parchment/jquery.min.js?v=1775078368"></script>
+<script src="lib/parchment/ie.js?v=1775078368" nomodule></script>
 <script>
+    // story_name is REQUIRED — parchment.js calls .substring() on it to detect
+    // the file type (.ulx.js, .gblorb.js, .z3.js). Without it you get:
+    //   TypeError: Cannot read properties of undefined (reading 'substring')
     parchment_options = {
-        default_story: ['lib/parchment/zork1.ulx.js'],
+        default_story: ['lib/parchment/zork1-v1.ulx.js'],
         lib_path: 'lib/parchment/',
-        story_name: 'zork1.ulx.js',
+        story_name: 'zork1-v1.ulx.js',
         use_proxy: 0,
         do_vm_autosave: 1,
     };
 </script>
-<script src="lib/parchment/main.js"></script>
-<script src="lib/parchment/resourcemap.js"></script>
+<script src="lib/parchment/parchment.js?v=1775078368"></script>
+<script src="lib/parchment/resourcemap.js?v=1775078368"></script>
 <script>
     window.addEventListener('pageshow', function(e) {
         if (e.persisted) { window.location.reload(); }
@@ -133,20 +141,49 @@ div#gameport {
   <div id="windowport">
     <noscript>
       <div style="text-align:center; padding:40px; color:#aa6644;">
-        <h2>ZORK I</h2>
+        <h2>Zork I - The Great Underground Empire</h2>
         <p>JavaScript is required to play this game.</p>
       </div>
     </noscript>
   </div>
   <div id="loadingpane">
-    <div style="margin-bottom:20px; font-size:1.4em; color:#aa9966; letter-spacing:4px;">ZORK I</div>
+    <div style="margin-bottom:20px; font-size:1.4em; color:#aa9966; letter-spacing:4px;">Zork I - The Great Underground Empire</div>
     <img src="lib/parchment/waiting.gif" alt="Loading" style="opacity:0.5"><br>
-    <em>Loading the Great Underground Empire...</em>
+    <em>Loading...</em>
   </div>
   <div id="errorpane" style="display:none;">
     <div id="errorcontent">...</div>
   </div>
 </div>
+
+<script src="lib/parchment/theme-listener.js?v=1775078368"></script>
+<script>
+ThemeListener.init({
+  buildCSS: function(g, sb) {
+    return 'body, html { background: ' + g.bodyBg + ' !important; }\n' +
+      '.BufferWindow { color: ' + g.bufferFg + ' !important; background-color: ' + g.bufferBg + ' !important; font-family: ' + g.monoFamily + ' !important; font-size: ' + g.bufferSize + ' !important; line-height: ' + g.bufferLineHeight + ' !important; }\n' +
+      '.BufferWindow span { color: ' + g.bufferFg + ' !important; }\n' +
+      '.BufferWindow span.reverse { color: ' + g.bufferBg + ' !important; background-color: ' + g.bufferFg + ' !important; }\n' +
+      '.BufferWindow .Style_input { color: ' + g.inputFg + ' !important; }\n' +
+      '.BufferWindow .Style_emphasized { color: ' + g.emphFg + ' !important; }\n' +
+      '.BufferWindow .Style_header { color: ' + g.headerFg + ' !important; }\n' +
+      '.BufferWindow .Style_subheader,\n' +
+      '.BufferWindow .Style_alert { color: ' + g.headerFg + ' !important; }\n' +
+      '.BufferWindow .Input,\n' +
+      '.BufferWindow textarea.Input { color: ' + g.inputFg + ' !important; caret-color: ' + g.inputFg + '; font-family: ' + g.monoFamily + ' !important; }\n' +
+      '.GridWindow { color: ' + g.gridFg + ' !important; background-color: ' + g.gridBg + ' !important; padding: 4px 12px !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; margin: 0 !important; width: 100% !important; box-sizing: border-box !important; }\n' +
+      '.GridWindow span { color: ' + g.gridFg + ' !important; background-color: ' + g.gridBg + ' !important; }\n' +
+      '.GridWindow span.reverse { color: ' + g.gridFg + ' !important; background-color: ' + g.gridBg + ' !important; }\n' +
+      '#loadingpane { color: ' + g.bufferFg + '; background: ' + g.bodyBg + '; font-family: ' + g.monoFamily + '; }\n' +
+      '.WindowFrame { background: transparent !important; }\n' +
+      'div#gameport { background: linear-gradient(to bottom, ' + g.gridBg + ' 0px, ' + g.gridBg + ' ' + ((parseInt(g.gridLineHeight) || 20) + 10) + 'px, ' + g.bufferBg + ' ' + ((parseInt(g.gridLineHeight) || 20) + 10) + 'px) !important; }\n' +
+      '* { scrollbar-color: ' + sb.thumb + ' ' + sb.track + '; }\n' +
+      '::-webkit-scrollbar { width: 10px; background: ' + sb.track + '; }\n' +
+      '::-webkit-scrollbar-thumb { background: ' + sb.thumb + '; border-radius: 4px; }\n' +
+      '::-webkit-scrollbar-thumb:hover { background: ' + sb.thumbHover + '; }\n';
+  }
+});
+</script>
 
 </body>
 </html>

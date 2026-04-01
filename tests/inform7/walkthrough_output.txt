@@ -4,7 +4,7 @@
 
 Zork I - The Great Underground Empire
 An Interactive Fiction by Infocom (translated to Inform 7)
-Release 1 / Serial number 260325 / Inform 7 v10.1.2 / D
+Release 1 / Serial number 260401 / Inform 7 v10.1.2 / D
 v1: The Port
 Translated to Inform 7 by John Escobedo
 Original by Marc Blank, Dave Lebling, Bruce Daniels, and Tim Anderson
@@ -168,12 +168,13 @@ This is a small room with passages to the east and south and a forbidding hole l
 
 A nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room.
 
+The axe crashes against the rock, throwing sparks!
 Your sword has begun to glow very brightly.
 
->Your stroke lands, but it was only the flat of the blade.
->The troll is battered into unconsciousness.
->The unconscious troll cannot defend himself: He dies.
-
+>Clang! Crash! The troll parries.
+The axe sweeps past as you jump aside.
+>Your sword pinks the troll on the wrist, but it's not serious.
+>The troll takes a fatal blow and slumps to the floor dead.
 Almost as soon as the troll breathes his last breath, a cloud of sinister black fog envelops him, and when the fog lifts, the carcass has disappeared.
 
 Your sword is no longer glowing.
@@ -314,6 +315,8 @@ This is part of a maze of twisty little passages, all alike.
 Maze
 This is part of a maze of twisty little passages, all alike.
 
+There is a suspicious-looking individual, holding a bag, leaning against one wall. He is armed with a vicious-looking stiletto.
+
 >
 Maze
 This is part of a maze of twisty little passages, all alike.
@@ -353,8 +356,6 @@ A cyclops, who looks prepared to eat horses (much less mere adventurers), blocks
 
 >Strange Passage
 This is a long passage. To the west is one entrance. On the east there is an old wooden door, with a large opening in it (about cyclops sized).
-
-There is a suspicious-looking individual, holding a bag, leaning against one wall. He is armed with a vicious-looking stiletto.
 
 >
 Living Room
@@ -409,8 +410,6 @@ This is a narrow east-west passageway. There is a narrow stairway leading down a
 Round Room
 This is a circular stone room with passages in all directions. Several of them have unfortunately been blocked by cave-ins.
 
-There is a suspicious-looking individual, holding a bag, leaning against one wall. He is armed with a vicious-looking stiletto.
-
 >
 Engravings Cave
 You have entered a low cave with passages leading northwest and east.
@@ -444,6 +443,8 @@ You can see a brass bell here.
 >
 Altar
 This is the south end of a large temple. In front of you is what appears to be an altar. In one corner is a small hole in the floor which leads into darkness. You probably could not get back up it.
+
+There is a suspicious-looking individual, holding a bag, leaning against one wall. He is armed with a vicious-looking stiletto.
 
 On the altar is a large black book, open to page 569.
 
@@ -604,7 +605,7 @@ Your collection of treasures consists of:
 
 >The brass lantern is now on.
 
->Look around.
+>Have your eyes checked.
 
 >
 Cellar
@@ -740,8 +741,6 @@ This is a forest, with trees in all directions. To the east, there appears to be
 
 You can see a screwdriver and a brass lantern here.
 
-You hear in the distance the chirping of a song bird.
-
 >Taken.
 
 >
@@ -802,8 +801,6 @@ You can also see a sword here.
 
 >East-West Passage
 This is a narrow east-west passageway. There is a narrow stairway leading down at the north end of the room.
-
-There is a suspicious-looking individual, holding a bag, leaning against one wall. He is armed with a vicious-looking stiletto.
 
 >
 Round Room
@@ -884,6 +881,8 @@ This is a circular stone room with passages in all directions. Several of them h
 >
 East-West Passage
 This is a narrow east-west passageway. There is a narrow stairway leading down at the north end of the room.
+
+There is a suspicious-looking individual, holding a bag, leaning against one wall. He is armed with a vicious-looking stiletto.
 
 >
 The Troll Room
@@ -979,6 +978,8 @@ You are facing the north side of a white house. There is no door here, and all t
 Forest Path
 This is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.
 
+You hear in the distance the chirping of a song bird.
+
 >
 Forest
 This is a forest, with trees in all directions. To the east, there appears to be sunlight.
@@ -1028,7 +1029,7 @@ Your collection of treasures consists of:
 
 >The brass lantern is now on.
 
->Have your eyes checked.
+>Look around.
 
 >
 Cellar
@@ -1082,7 +1083,11 @@ You are in a small room. Strange squeaky sounds may be heard coming from the pas
 Bat Room
 You are in a small room which has doors only to the east and south. In the corner of the room on the ceiling is a large vampire bat who is obviously deranged and holding his nose.
 
->You can't see any such thing.
+There is an exquisite jade figurine here.
+
+>Taken.
+
+[Your score has just gone up by five points.]
 
 >
 Shaft Room
@@ -1102,11 +1107,7 @@ This is a small nondescript room. However, from the direction of a small descend
 Gas Room
 This is a small room which smells strongly of coal gas. There is a short climb up some stairs and a narrow tunnel leading east.
 
-You can see a sapphire-encrusted bracelet here.
-
->Taken.
-
-[Your score has just gone up by five points.]
+>You can't see any such thing.
 
 >
 Coal Mine
@@ -1119,6 +1120,8 @@ This is a nondescript part of a coal mine.
 >
 Coal Mine
 This is a nondescript part of a coal mine.
+
+There is a suspicious-looking individual, holding a bag, leaning against one wall. He is armed with a vicious-looking stiletto.
 
 >
 Coal Mine
@@ -1224,9 +1227,9 @@ You can see a broken timber here.
 
 >Dropped.
 
->You can't see any such thing.
-
 >Dropped.
+
+>You can't see any such thing.
 
 >Dropped.
 
@@ -1281,13 +1284,13 @@ It is now pitch dark in here!
 >Timber Room
 This is a long and narrow passage, which is cluttered with broken timbers. A wide passage comes from the east and turns at the west end of the room into a very narrow passageway. From the west comes a strong draft.
 
-You can see a hand-held air pump, a sapphire-encrusted bracelet, a brass lantern (providing light) and a broken timber here.
+You can see a hand-held air pump, a jade figurine, a brass lantern (providing light) and a broken timber here.
+
+>Taken.
 
 >Taken.
 
 >You can't see any such thing.
-
->Taken.
 
 >Taken.
 
@@ -1372,11 +1375,11 @@ Your collection of treasures consists of:
 
 >The brass lantern is now off.
 
->You can't see any such thing.
-
->You put the sapphire-encrusted bracelet into the trophy case.
+>You put the jade figurine into the trophy case.
 
 [Your score has just gone up by five points.]
+
+>You can't see any such thing.
 
 >You put the huge diamond into the trophy case.
 
@@ -1388,7 +1391,7 @@ Your collection of treasures consists of:
 
 >The brass lantern is now on.
 
->Too late for that.
+>Look around.
 
 >
 Cellar
@@ -1572,6 +1575,8 @@ You are at the top of the Great Canyon on its west wall. From here there is a ma
 Clearing
 You are in a small clearing in a well marked forest path that extends to the east and west.
 
+You hear in the distance the chirping of a song bird.
+
 >
 Behind House
 You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is open.
@@ -1587,7 +1592,7 @@ You are in the living room. There is a doorway to the east. To the west is a cyc
 Your collection of treasures consists of:
   a torch
   a huge diamond
-  a sapphire-encrusted bracelet
+  a jade figurine
   a crystal trident
   a trunk of jewels
   a pot of gold
@@ -1701,14 +1706,15 @@ There is a suspicious-looking individual, holding a bag, leaning against one wal
 
 >The blow lands, making a shallow gash in the thief's arm!
 >The blow lands, making a shallow gash in the thief's arm!
->The thief is struck on the arm; blood begins to trickle down.
->Your bloody axe pinks the thief on the wrist, but it's not serious.
->The fatal blow strikes the thief square in the heart: He dies.
+>Your bloody axe misses the thief by an inch.
+>Your stroke lands, but it was only the flat of the blade.
+>Your stroke lands, but it was only the flat of the blade.
+>The thief takes a fatal blow and slumps to the floor dead.
 Almost as soon as the thief breathes his last breath, a cloud of sinister black fog envelops him, and when the fog lifts, the carcass has disappeared.
 
 
 As the thief dies, the power of his magic decreases, and his treasures reappear:
-  A jade figurine
+  A sapphire-encrusted bracelet
   A jewel-encrusted egg, with a golden clockwork canary
   A stiletto
   A zorkmid
@@ -1720,8 +1726,6 @@ As the thief dies, the power of his magic decreases, and his treasures reappear:
   A granite wall
 
 The chalice is now safe to take.
-
->You can't see any such thing.
 
 >You can't see any such thing.
 
@@ -1767,7 +1771,7 @@ Your collection of treasures consists of:
   a large emerald
   a torch
   a huge diamond
-  a sapphire-encrusted bracelet
+  a jade figurine
   a crystal trident
   a trunk of jewels
   a pot of gold
@@ -1810,8 +1814,6 @@ This is a path winding through a dimly lit forest. The path heads north-south he
 
 >Taken.
 
-You hear in the distance the chirping of a song bird.
-
 [Your score has just gone up by one point.]
 
 >
@@ -1837,7 +1839,7 @@ Your collection of treasures consists of:
   a large emerald
   a torch
   a huge diamond
-  a sapphire-encrusted bracelet
+  a jade figurine
   a crystal trident
   a trunk of jewels
   a pot of gold
@@ -1873,7 +1875,7 @@ Your collection of treasures consists of:
   a large emerald
   a torch
   a huge diamond
-  a sapphire-encrusted bracelet
+  a jade figurine
   a crystal trident
   a trunk of jewels
   a pot of gold
